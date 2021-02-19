@@ -9,13 +9,13 @@
 ui.chat_icon.visible = false
 function statusicon()
 	visible = not visible
-    if ( ui.login_window.is_active == true ) or ( ui.login_window.is_active == false ) then
+	if ( ui.login_window.is_active == true ) or ( ui.login_window.is_active == false ) then
 		if ( visible ) then
 			ui.main_window:show_all()
-        else
-            ui.main_window:hide()
-        end
-    end
+		else
+			ui.main_window:hide()
+		end
+	end
 end
 
 function ui.chat_icon:on_activate()
@@ -30,7 +30,7 @@ function create_menu(event_button, event_time)
 			  icon_name = "image-missing"
 			},
 			on_activate = function()
-                ui.main_window:show_all()
+				ui.main_window:show_all()
 			end
 		},
 		Gtk.ImageMenuItem {
@@ -39,7 +39,7 @@ function create_menu(event_button, event_time)
 			  icon_name = "image-missing"
 			},
 			on_activate = function()
-                ui.main_window:hide()
+				ui.main_window:hide()
 			end
 		},
 		Gtk.SeparatorMenuItem {},
