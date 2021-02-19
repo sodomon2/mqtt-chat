@@ -10,20 +10,21 @@
 --- @See https://github.com/tacigar/lua-mqtt
 local mqtt      = require('mqtt')
 
-local lgi       = require('lgi')
 local json      = require('lib.json')
+lgi       = require('lgi')
 
-local GObject   = lgi.require('GObject', '2.0')
-local Gdk       = lgi.require('Gdk', '3.0')
-local GLib      = lgi.require('GLib', '2.0')
-local Gtk       = lgi.require('Gtk', '3.0')
+GObject   = lgi.require('GObject', '2.0')
+Gdk       = lgi.require('Gdk', '3.0')
+GLib      = lgi.require('GLib', '2.0')
+Gtk       = lgi.require('Gtk', '3.0')
 
-local assert    = lgi.assert
-local builder   = Gtk.Builder()
-
+builder   = Gtk.Builder()
 builder:add_from_file('data/chat.ui')
-local ui = builder.objects
+ui = builder.objects
 msg = nil
+
+-- Mqtt-Chat files
+require 'src.tray'
 
 function login()
     username    = ui.entry_user.text
@@ -44,6 +45,7 @@ end
 
 function ui.btn_login:on_clicked()    
     login()
+    ui.chat_icon.visible = true
     ui.login_window:hide()
     ui.main_window:show_all()
 end
@@ -80,7 +82,6 @@ GLib.timeout_add(
         return true
     end
 )
-
 
 function quit()
     if ui.main_window.is_active == true then
