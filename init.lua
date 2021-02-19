@@ -55,8 +55,8 @@ function send()
 	local msje = tostring(ui.entry_message.text)
 	if ( msje ~= '' ) then
 		local info = {
-			user = username,
-			msg = msje,
+			username = username,
+			message = msje,
 			time = os.date('%H:%M')
 		}
 		client:publish( topic, json.encode(info))
@@ -72,10 +72,10 @@ GLib.timeout_add(
 	function()
 		if msg then
 			local message = json.decode(msg)
-			print(message.user .. ': ' .. message.msg)
+			print(message.username .. ': ' .. message.message)
 			ui.buffer_messages:insert(ui.buffer_messages:get_iter_at_mark(mark),
 				'\n'
-				.. ('%s [%s]: %s'):format(message.time, message.user, message.msg),
+				.. ('%s [%s]: %s'):format(message.time, message.username, message.message),
 			-1)
 			ui.messages:scroll_mark_onscreen(mark)
 			msg = nil
