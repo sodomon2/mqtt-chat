@@ -17,12 +17,14 @@ GObject     = lgi.require('GObject', '2.0')
 Gdk         = lgi.require('Gdk', '3.0')
 GLib        = lgi.require('GLib', '2.0')
 Gtk         = lgi.require('Gtk', '3.0')
+Notify      = lgi.require('Notify')
 
 builder     = Gtk.Builder()
 
 builder:add_from_file('data/chat.ui')
 ui = builder.objects
 msg = nil
+Notify.init("Mqtt-chat")
 
 -- Mqtt-Chat files
 require 'src.tray'
@@ -77,6 +79,16 @@ GLib.timeout_add(
 				'\n'
 				.. ('%s [%s]: %s'):format(message.time, message.username, message.message),
 			-1)
+			if ui.main_window.is_active == false then
+				if message.username ~= username then
+					notification = Notify.Notification.new(
+						message.username,
+						message.message,
+						'avatar-default'
+					)
+					notification:show()
+				end
+			end
 			ui.messages:scroll_mark_onscreen(mark)
 			msg = nil
 		end
