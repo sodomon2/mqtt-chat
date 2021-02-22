@@ -160,8 +160,14 @@ end
 ui.entry_message:grab_focus()
 
 function ui.entry_message:on_key_release_event(env)
-	if ( env.keyval  == Gdk.KEY_Return ) then
+	if ( env.keyval == Gdk.KEY_Return ) then
 		send()
+	end
+end
+
+function ui.entry_topic:on_key_release_event(env)
+	if ( env.keyval == Gdk.KEY_Return ) then
+		login()
 	end
 end
 
