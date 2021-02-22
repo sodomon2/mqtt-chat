@@ -179,8 +179,7 @@ GLib.timeout_add(
 			print(message.username .. ': ' .. message.message)
 			if message.username == username then
 				new_message('for', nil, message.message, os.date('%H:%M'))
-			end
-			if message.username ~= username then
+			else
 				new_message('from', message.username, message.message, os.date('%H:%M'))
 				if ui.main_window.is_active == false then
 					notification = Notify.Notification.new(
