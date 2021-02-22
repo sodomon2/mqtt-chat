@@ -170,6 +170,7 @@ GLib.timeout_add(
 	function()
 		if msg then
 			local message = json.decode(msg)
+			print(message.username .. ': ' .. message.message)
 			if message.username == username then
 				new_message('for', nil, message.message, os.date('%H:%M'))
 			end
