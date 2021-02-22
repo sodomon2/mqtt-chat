@@ -21,13 +21,14 @@ function login()
 	end, nil)
 	client:connect{}
 	client:subscribe(topic, 1)
+	
+	ui.chat_icon.visible = true
+	ui.login_window:hide()
+	ui.main_window:show_all()
 end
 
 function ui.btn_login:on_clicked()    
 	login()
-	ui.chat_icon.visible = true
-	ui.login_window:hide()
-	ui.main_window:show_all()
 end
 
 function quit()
