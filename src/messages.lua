@@ -174,9 +174,9 @@ end
 
 function message_log(log_type, arg1, arg2)
 	if log_type == 'for' then
-		print(string.format("\27[32m" .. arg1 ..":\27[0m " .. arg2 .. ""))
+		print("\27[32m" .. arg1 .. ":\27[0m " .. arg2 .. "")
 	elseif log_type == 'from' then
-		print(string.format("\27[34m%s:\27[0m %s", arg1 , arg2))
+		print("\27[34m" .. arg1 .. ":\27[0m " .. arg2 .. "")
 	end
 end
 
