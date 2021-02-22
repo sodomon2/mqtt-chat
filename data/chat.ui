@@ -547,23 +547,11 @@ That's all there is to it!
       </object>
     </child>
   </object>
-  <object class="GtkTextBuffer" id="buffer_messages"/>
   <object class="GtkStatusIcon" id="chat_icon">
     <property name="pixbuf">icon/mqtt-chat.png</property>
     <property name="has_tooltip">True</property>
     <property name="tooltip_markup" translatable="yes">Chat-mqtt</property>
     <signal name="activate" handler="on_activate" swapped="no"/>
-  </object>
-  <object class="GtkListStore" id="list_user">
-    <columns>
-      <!-- column-name usuario -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">@Sodomon</col>
-      </row>
-    </data>
   </object>
   <object class="GtkDialog" id="login_window">
     <property name="can_focus">False</property>
@@ -809,18 +797,21 @@ That's all there is to it!
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="GtkScrolledWindow" id="scroll_box">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="shadow_type">in</property>
             <child>
-              <object class="GtkTextView" id="messages">
-                <property name="height_request">107</property>
+              <object class="GtkViewport">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="vexpand">True</property>
-                <property name="editable">False</property>
-                <property name="buffer">buffer_messages</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkListBox" id="message_box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="activate_on_single_click">False</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

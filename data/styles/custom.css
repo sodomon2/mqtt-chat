@@ -1,0 +1,103 @@
+/**
+ * This code is part the MoonZaphire project <https://github.com/diazvictor/MoonZaphire/>
+ * @date 20.02.2021 04:12:56 -04
+ **/
+
+list.message-box {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #F1F1F1;
+}
+
+list.message-box row.message-for {
+    margin-top: 10px;
+    margin-left: 100px;
+}
+
+list.message-box row.message-for box.message {
+    background-color: #1E90FF;
+    padding: 10px;
+    border-radius: 10px 10px 0px 10px;
+    border-bottom: 2px solid #1E5EFF;
+}
+
+list.message-box row.message-for box.message>label {
+    color: #F1F1F1;
+}
+
+list.message-box row.message-for box.message>label selection {
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+list.message-box row.message-for box.message box.reply {
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    padding-left: 5px;
+}
+
+list.message-box row.message-for box.message box.reply label.title {
+    font-weight: 500;
+}
+
+list.message-box row.message-for box.message box.reply label.title,
+list.message-box row.message-for box.message box.reply label {
+    color: #F1F1F1;
+}
+
+list.message-box row.message-for label.time {
+    color: #2B2B2B;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+list.message-box row.message-from {
+    margin-top: 10px;
+    margin-right: 100px;
+}
+
+list.message-box row.message-from box>label.title {
+    color: #2B2B2B;
+    font-weight: 500;
+    margin-left: 36px;
+    margin-bottom: 8px;
+}
+
+list.message-box row.message-from box image.avatar {
+    margin-right: 5px;
+    background:#000;
+}
+
+list.message-box row.message-from box box.message {
+    min-width: 50px;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    border-radius: 10px 10px 10px 0px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+list.message-box row.message-from box box.message>label {
+    color: #2B2B2B;
+}
+
+list.message-box row.message-from box box.message>label selection {
+    background-color: rgba(30, 144, 255, 0.24);
+}
+
+list.message-box row.message-from box box.message box.reply {
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    padding-left: 5px;
+}
+
+list.message-box row.message-from box box.message box.reply label.title {
+    font-weight: 500;
+}
+
+list.message-box row.message-from box box.message box.reply label.title,
+list.message-box row.message-from box box.message box.reply label {
+    color: #2B2B2B;
+}
+
+list.message-box row.message-from box>label.time {
+    color: #2B2B2B;
+    font-weight: 500;
+    margin-top: 5px;
+}
