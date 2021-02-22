@@ -155,6 +155,7 @@ function send()
 		}
 		client:publish(topic, json.encode(info))
 		ui.entry_message.text = ''
+		ui.entry_message:grab_focus()
 	end
 end
 ui.entry_message:grab_focus()
@@ -178,9 +179,9 @@ GLib.timeout_add(
 			local message = json.decode(msg)
 			print(message.username .. ': ' .. message.message)
 			if message.username == username then
-				new_message('for', nil, message.message, os.date('%H:%M'))
+				new_message('for', nil, emoji.emojify(message.message), os.date('%H:%M'))
 			else
-				new_message('from', message.username, message.message, os.date('%H:%M'))
+				new_message('from', message.username, emoji.emojify(message.message), os.date('%H:%M'))
 				if ui.main_window.is_active == false then
 					notification = Notify.Notification.new(
 						message.username,

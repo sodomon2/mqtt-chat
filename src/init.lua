@@ -9,8 +9,10 @@
 
 --- @See https://github.com/tacigar/lua-mqtt
 --- @See https://github.com/craigmj/json4lua
+--- @See https://github.com/kitsunies/emoji.lua
 mqtt  		= require('mqtt')
 json  		= require('lib.json')
+emoji  		= require('emoji')
 
 lgi   		= require('lgi')
 
