@@ -177,10 +177,11 @@ GLib.timeout_add(
 	function()
 		if msg then
 			local message = json.decode(msg)
-			print(message.username .. ': ' .. message.message)
 			if message.username == username then
+				print(string.format("\27[32m%s:\27[0m %s",message.username, message.message))
 				new_message('for', nil, emoji.emojify(message.message), os.date('%H:%M'))
 			else
+				print(string.format("\27[34m%s:\27[0m %s",message.username, message.message))
 				new_message('from', message.username, emoji.emojify(message.message), os.date('%H:%M'))
 				if ui.main_window.is_active == false then
 					notification = Notify.Notification.new(
