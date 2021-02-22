@@ -172,16 +172,24 @@ function ui.entry_topic:on_key_release_event(env)
 	end
 end
 
+function message_log(log_type, arg1, arg2)
+	if log_type == 'for' then
+		print(string.format("\27[32m" .. arg1 ..":\27[0m " .. arg2 .. ""))
+	elseif log_type == 'from' then
+		print(string.format("\27[34m%s:\27[0m %s", arg1 , arg2))
+	end
+end
+
 GLib.timeout_add(
 	GLib.PRIORITY_DEFAULT, 500,
 	function()
 		if msg then
 			local message = json.decode(msg)
 			if message.username == username then
-				print(string.format("\27[32m%s:\27[0m %s",message.username, message.message))
+				message_log('for', message.username, message.message)
 				new_message('for', nil, emoji.emojify(message.message), os.date('%H:%M'))
 			else
-				print(string.format("\27[34m%s:\27[0m %s",message.username, message.message))
+				message_log('from', message.username, emoji.emojify(message.message))
 				new_message('from', message.username, emoji.emojify(message.message), os.date('%H:%M'))
 				if ui.main_window.is_active == false then
 					notification = Notify.Notification.new(
