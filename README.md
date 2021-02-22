@@ -13,4 +13,8 @@ A simple MQTT chat in lua
 
 ### Execute
 
-`lua5.1 init.lua` (or `luajit init.lua`)
+```bash
+$ git clone https://github.com/sodomon2/mqtt-chat.git
+$ cd mqtt-chat && cd src/
+$ lua5.1 init.lua (or luajit init.lua)
+```
