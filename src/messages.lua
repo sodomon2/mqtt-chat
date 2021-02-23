@@ -38,7 +38,7 @@ function new_message(message_type, username, message, message_time)
 						Gtk.Label {
 							visible = true,
 							halign = Gtk.Align.END,
-							label = message,
+							label = emoji.emojify(message),
 							use_markup = true,
 							selectable = true
 						}
@@ -108,7 +108,7 @@ function new_message(message_type, username, message, message_time)
 								orientation = Gtk.Orientation.HORIZONTAL,
 								Gtk.Label {
 									visible = true,
-									label = message,
+									label = emoji.emojify(message),
 									use_markup = true,
 									selectable = true
 								}
@@ -174,9 +174,9 @@ end
 
 function message_log(log_type, arg1, arg2)
 	if log_type == 'for' then
-		print("\27[32m" .. arg1 .. ":\27[0m " .. arg2 .. "")
+		print("\27[32m" .. arg1 .. ":\27[0m " .. emoji.emojify(arg2) .. "")
 	elseif log_type == 'from' then
-		print("\27[34m" .. arg1 .. ":\27[0m " .. arg2 .. "")
+		print("\27[34m" .. arg1 .. ":\27[0m " .. emoji.emojify(arg2) .. "")
 	end
 end
 
@@ -187,14 +187,14 @@ GLib.timeout_add(
 			local message = json.decode(msg)
 			if message.username == username then
 				message_log('for', message.username, message.message)
-				new_message('for', nil, emoji.emojify(message.message), os.date('%H:%M'))
+				new_message('for', nil, message.message, os.date('%H:%M'))
 			else
-				message_log('from', message.username, emoji.emojify(message.message))
-				new_message('from', message.username, emoji.emojify(message.message), os.date('%H:%M'))
+				message_log('from', message.username, message.message)
+				new_message('from', message.username, message.message, os.date('%H:%M'))
 				if ui.main_window.is_active == false then
 					notification = Notify.Notification.new(
 						message.username,
-						message.message,
+						emoji.emojify(message.message),
 						'avatar-default-symbolic'
 					)
 					notification:show()
