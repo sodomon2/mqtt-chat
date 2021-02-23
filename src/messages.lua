@@ -61,11 +61,16 @@ function new_message(message_type, username, message, message_time)
 				},
 			}
 		}
-		ui.message_box.on_size_allocate = function ()
-			local adj = ui.scroll_box:get_vadjustment()
-			adj:set_value(adj.upper - adj.page_size)
-		end
 		message:get_style_context():add_class('message-for')
+		local scroll_down
+		ui.message_box.on_size_allocate = function ()
+			if scroll_down then
+				local adj = ui.scroll_box:get_vadjustment()
+				adj:set_value(adj.upper - adj.page_size)
+				scroll_down = false
+			end
+		end
+		scroll_down = true
 	elseif message_type == 'from' then
 		message = Gtk.ListBoxRow {
 			visible = true,
