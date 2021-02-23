@@ -33,13 +33,14 @@ function new_message(message_type, username, message, message_time)
 						id = 'message',
 						visible = true,
 						can_focus = false,
-						halign = Gtk.Align.END,
-						orientation = Gtk.Orientation.HORIZONTAL,
+						orientation = Gtk.Orientation.VERTICAL,
+						width_request = 70,
 						Gtk.Label {
 							visible = true,
 							halign = Gtk.Align.END,
 							label = emoji.emojify(message),
-							use_markup = true,
+							wrap = true,
+							wrap_mode = Gtk.WrapMode.CHAR,
 							selectable = true
 						}
 					},
@@ -80,6 +81,7 @@ function new_message(message_type, username, message, message_time)
 						id = 'author',
 						visible = true,
 						halign = Gtk.Align.START,
+						ellipsize = Pango.EllipsizeMode.END,
 						label = username
 					},
 					expand = false,
@@ -105,11 +107,14 @@ function new_message(message_type, username, message, message_time)
 								id = 'message',
 								visible = true,
 								can_focus = false,
-								orientation = Gtk.Orientation.HORIZONTAL,
+								orientation = Gtk.Orientation.VERTICAL,
+								width_request = 70,
 								Gtk.Label {
 									visible = true,
 									label = emoji.emojify(message),
-									use_markup = true,
+									halign = Gtk.Align.START,
+									wrap = true,
+									wrap_mode = Gtk.WrapMode.CHAR,
 									selectable = true
 								}
 							}

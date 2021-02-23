@@ -20,6 +20,7 @@ GObject     = lgi.require('GObject', '2.0')
 Gdk         = lgi.require('Gdk', '3.0')
 GLib        = lgi.require('GLib', '2.0')
 Gtk         = lgi.require('Gtk', '3.0')
+Pango       = lgi.require('Pango', '1.0')
 Notify      = lgi.require('Notify')
 
 builder     = Gtk.Builder()
