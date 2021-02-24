@@ -7,7 +7,7 @@ A simple MQTT chat in lua
 - GLib 2.0+
 - LibNotify
 - GObject-Introspection
-- [lua-mosquitto](https://github.com/flukso/lua-mosquitt) with `reconnect_async` enabled. **for more information see this [commit](https://github.com/flukso/lua-mosquitto/tree/8f2696ed0db39665230d34cd29e2d6b46961e19c)**
+- [lua-mosquitto](https://github.com/flukso/lua-mosquitto)
 - [Lua5.1+](https://www.lua.org/download.html) (or [LuaJIT 2.0+](https://luajit.org/))
 - [LGI](https://github.com/pavouk/lgi)
 - [emoji.lua](https://github.com/kitsunies/emoji.lua)
