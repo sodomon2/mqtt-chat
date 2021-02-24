@@ -165,8 +165,10 @@ function send()
 		}
 		client:publish(topic, json.encode(info))
 		ui.entry_message.text = ''
-		ui.entry_message:grab_focus()
+		message_log('for', username, msje)
+		new_message('for', nil, msje, os.date('%H:%M'))
 	end
+	ui.entry_message:grab_focus()
 end
 ui.entry_message:grab_focus()
 
@@ -189,32 +191,6 @@ function message_log(log_type, arg1, arg2)
 		print("\27[34m" .. arg1 .. ":\27[0m " .. emoji.emojify(arg2) .. "")
 	end
 end
-
-GLib.timeout_add(
-	GLib.PRIORITY_DEFAULT, 500,
-	function()
-		if msg then
-			local message = json.decode(msg)
-			if message.username == username then
-				message_log('for', message.username, message.message)
-				new_message('for', nil, message.message, os.date('%H:%M'))
-			else
-				message_log('from', message.username, message.message)
-				new_message('from', message.username, message.message, os.date('%H:%M'))
-				if ui.main_window.is_active == false then
-					notification = Notify.Notification.new(
-						message.username,
-						emoji.emojify(message.message),
-						'avatar-default-symbolic'
-					)
-					notification:show()
-				end
-			end
-			msg = nil
-		end
-		return true
-	end
-)
 
 function ui.btn_send:on_clicked()
 	send()

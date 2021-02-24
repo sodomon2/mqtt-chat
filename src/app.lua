@@ -6,22 +6,85 @@
  @date      22.02.2021 00:11:52 -04
 ]]
 
-function login()
-	username    = ui.entry_user.text
-	broker 	    = ui.entry_broker.text
-	topic       = ui.entry_topic.text
+function make_random()
+	math.randomseed(os.time())
+	return tostring(math.random(10000, 100000))
+end
 
-	client      = mqtt.AsyncClient {
-	  serverURI = broker,
-	  clientID  = username,
-	}
-
-	client:setCallbacks(nil, function(topicName, message)
-		msg = message.payload
-	end, nil)
-	client:connect{}
-	client:subscribe(topic, 1)
+function connect()
+	local user_id = make_random()
+	client 	= mqtt.new( user_id .. '-mqtt_chat', false )
 	
+	client.ON_CONNECT = function ()
+		client:subscribe(topic, 2)
+		ui.notify_revealer:set_reveal_child(false)
+	end
+	
+	client.ON_MESSAGE = function ( mid, topic, payload )
+		local msg = json.decode(payload)
+		
+		if not msg then return end
+		if ( msg.username == username ) then return end
+		
+		if ( msg.message and msg.username ) then
+			message_log('from', msg.username, msg.message)
+			new_message('from', msg.username, msg.message, os.date('%H:%M'))
+			if ui.main_window.is_active == false then
+				notification = Notify.Notification.new(
+					msg.username,
+					emoji.emojify(msg.message),
+					'avatar-default-symbolic'
+				)
+				notification:show()
+			end	
+		end
+		collectgarbage("collect")
+	end
+
+	client.ON_DISCONNECT = function ()
+		local ok, errno, errmsg
+		repeat
+			ok, errno, errmsg = client:reconnect_async()
+			if (not ok) then
+				io.write('ERROR ',errno, errmsg, "\n")
+			else
+				io.write("REconnecting ..\n")
+				ui.notify_revealer:set_reveal_child(true)
+			end
+		until(ok == true)
+	end
+
+	client:connect_async( broker, 1883, 60 )
+	GLib.timeout_add(GLib.PRIORITY_DEFAULT, 300,function ()
+			client:loop(1)
+			return true
+		end
+	)
+end
+
+function ui.button_notify_close:on_clicked()
+	ui.notify_revealer:set_reveal_child(false)
+end
+
+function login()
+	local result = true
+	username     = ui.entry_user.text
+	broker 	     = ui.entry_broker.text
+	topic        = ui.entry_topic.text
+
+
+	if username == '' or broker == '' or topic == '' then
+		ui.error:set_reveal_child(true)
+		ui.msg_err.label = 'Please insert username, broker and topic'
+		result = false
+		return
+	end
+
+
+	if result then
+		connect()
+	end
+
 	ui.chat_icon.visible = true
 	ui.login_window:hide()
 	ui.main_window:show_all()
@@ -33,7 +96,6 @@ end
 
 function quit()
 	if ui.main_window.is_active == true then
-		client:disconnect(1000)
 		client:destroy()
 		Gtk.main_quit()
 	else

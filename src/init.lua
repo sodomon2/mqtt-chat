@@ -7,10 +7,10 @@
  @date      19.02.2021 02:51:18 -04
 --]]
 
---- @See https://github.com/tacigar/lua-mqtt
+--- @See https://github.com/flukso/lua-mosquitto
 --- @See https://github.com/craigmj/json4lua
 --- @See https://github.com/kitsunies/emoji.lua
-mqtt  		= require('mqtt')
+mqtt  		= require('mosquitto')
 json  		= require('lib.json')
 emoji  		= require('emoji')
 
@@ -31,9 +31,9 @@ msg = nil
 Notify.init("Mqtt-chat")
 
 -- Mqtt-Chat files
-require 'app'
-require 'tray'
 require 'messages'
+require 'tray'
+require 'app'
 
 ui.login_window:show_all()
 Gtk.main()
