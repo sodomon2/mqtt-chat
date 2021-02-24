@@ -10,7 +10,6 @@ A simple MQTT chat in lua
 - [lua-mosquitto](https://github.com/flukso/lua-mosquitto)
 - [Lua5.1+](https://www.lua.org/download.html) (or [LuaJIT 2.0+](https://luajit.org/))
 - [LGI](https://github.com/pavouk/lgi)
-- [emoji.lua](https://github.com/kitsunies/emoji.lua)
 
 ### Execute
 
