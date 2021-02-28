@@ -14,18 +14,23 @@ end
 function connect()
 	local user_id = make_random()
 	client 	= mqtt.new( user_id .. '-mqtt_chat', false )
-	
+
 	client.ON_CONNECT = function ()
 		client:subscribe(topic, 2)
+		local message_connect = {
+			joined_message = ("%s has joined the chat!"):format(username),
+			time = os.date('%H:%M')
+		}
+		client:publish( topic, json.encode(message_connect))
 		ui.notify_revealer:set_reveal_child(false)
 	end
-	
+
 	client.ON_MESSAGE = function ( mid, topic, payload )
 		local msg = json.decode(payload)
 		
 		if not msg then return end
 		if ( msg.username == username ) then return end
-		
+
 		if ( msg.message and msg.username ) then
 			message_log('from', msg.username, msg.message)
 			new_message('from', msg.username, msg.message, os.date('%H:%M'))
@@ -36,8 +41,17 @@ function connect()
 					'avatar-default-symbolic'
 				)
 				notification:show()
-			end	
+			end
 		end
+
+		if (msg.joined_message) then
+			new_message('join-left', msg.joined_message, nil, nil)
+		end
+		
+		if (msg.left_message) then
+			new_message('join-left', msg.left_message, nil, nil)
+		end
+
 		collectgarbage("collect")
 	end
 
@@ -90,18 +104,23 @@ function login()
 	ui.main_window:show_all()
 end
 
-function ui.btn_login:on_clicked()    
+function ui.btn_login:on_clicked()
 	login()
 end
 
 function quit()
 	if ui.main_window.is_active == true then
+		local message_disconnect = {
+			left_message = ("%s has left the chat!"):format(username),
+			time = os.date('%H:%M')
+		}
+		client:publish( topic, json.encode(message_disconnect))
 		client:destroy()
 		Gtk.main_quit()
 	else
 		Gtk.main_quit()
 	end
-end 
+end
 
 function ui.main_window:on_destroy()
 	quit()

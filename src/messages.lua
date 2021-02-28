@@ -146,6 +146,44 @@ function new_message(message_type, username, message, message_time)
 		message.child.author:get_style_context():add_class('title')
 		message.child.avatar:get_style_context():add_class('icon')
 		message.child.avatar:get_style_context():add_class('avatar')
+	elseif message_type == 'join-left' then
+		message = Gtk.ListBoxRow {
+			visible = true,
+			halign = Gtk.Align.CENTER,
+			activatable = false,
+			selectable = false,
+			Gtk.Box {
+				visible = true,
+				{
+					Gtk.Box {
+						id = 'message',
+						visible = true,
+						can_focus = false,
+						orientation = Gtk.Orientation.HORIZONTAL,
+						width_request = 70,
+						Gtk.Label {
+							visible = true,
+							label = username,
+						}
+					},
+					expand = false,
+					fill = false,
+					position = 0
+				},
+				{
+					Gtk.Label {
+						id = 'time',
+						visible = true,
+						halign = Gtk.Align.END,
+						label = message_time
+					},
+					expand = false,
+					fill = true,
+					position = 2
+				},
+			}
+		}
+		message:get_style_context():add_class('message-join-left')
 	end
 
 	message.child.message:get_style_context():add_class('message')
