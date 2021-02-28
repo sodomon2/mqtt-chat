@@ -9,6 +9,15 @@ list.message-box {
     background: #F1F1F1;
 }
 
+list.message-box row.message-join-left {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #2B2B2B;
+    border-radius: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+}
+
 list.message-box row.message-for {
     margin-top: 10px;
     margin-left: 100px;
