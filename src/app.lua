@@ -37,7 +37,7 @@ function connect()
 			if ui.main_window.is_active == false then
 				notification = Notify.Notification.new(
 					msg.username,
-					emoji.emojify(msg.message),
+					msg.message,
 					'avatar-default-symbolic'
 				)
 				notification:show()
@@ -45,11 +45,11 @@ function connect()
 		end
 
 		if (msg.joined_message) then
-			new_message('join-left', msg.joined_message, nil, nil)
+			new_message('join-left', nil, msg.joined_message)
 		end
 		
 		if (msg.left_message) then
-			new_message('join-left', msg.left_message, nil, nil)
+			new_message('join-left', nil, msg.left_message)
 		end
 
 		collectgarbage("collect")

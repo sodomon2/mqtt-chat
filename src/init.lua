@@ -8,13 +8,8 @@
 --]]
 
 --- @See https://github.com/flukso/lua-mosquitto
---- @See https://github.com/craigmj/json4lua
---- @See https://github.com/kitsunies/emoji.lua
-package.path = package.path .. ';./lib/?.lua'
 mqtt  		= require('mosquitto')
-json  		= require('lib.json')
-emoji  		= require('emoji.init')
-
+json  		= require('cjson.safe')
 lgi   		= require('lgi')
 
 GObject     = lgi.require('GObject', '2.0')

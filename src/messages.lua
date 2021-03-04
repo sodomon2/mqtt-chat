@@ -38,7 +38,7 @@ function new_message(message_type, username, message, message_time)
 						Gtk.Label {
 							visible = true,
 							halign = Gtk.Align.END,
-							label = emoji.emojify(message),
+							label = message,
 							wrap = true,
 							wrap_mode = Gtk.WrapMode.CHAR,
 							selectable = true
@@ -116,7 +116,7 @@ function new_message(message_type, username, message, message_time)
 								width_request = 70,
 								Gtk.Label {
 									visible = true,
-									label = emoji.emojify(message),
+									label = message,
 									halign = Gtk.Align.START,
 									wrap = true,
 									wrap_mode = Gtk.WrapMode.CHAR,
@@ -163,7 +163,7 @@ function new_message(message_type, username, message, message_time)
 						width_request = 70,
 						Gtk.Label {
 							visible = true,
-							label = username,
+							label = message,
 						}
 					},
 					expand = false,
@@ -224,9 +224,9 @@ end
 
 function message_log(log_type, arg1, arg2)
 	if log_type == 'for' then
-		print("\27[32m" .. arg1 .. ":\27[0m " .. emoji.emojify(arg2) .. "")
+		print("\27[32m" .. arg1 .. ":\27[0m " .. arg2 .. "")
 	elseif log_type == 'from' then
-		print("\27[34m" .. arg1 .. ":\27[0m " .. emoji.emojify(arg2) .. "")
+		print("\27[34m" .. arg1 .. ":\27[0m " .. arg2 .. "")
 	end
 end
 
