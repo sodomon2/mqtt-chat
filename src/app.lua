@@ -6,6 +6,11 @@
  @date      22.02.2021 00:11:52 -04
 ]]
 
+local screen = Gdk.Screen:get_default()
+
+ui.main_window.default_width = screen:get_width()
+ui.main_window.default_height = screen:get_height()
+
 function make_random()
 	math.randomseed(os.time())
 	return tostring(math.random(10000, 100000))

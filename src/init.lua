@@ -8,6 +8,7 @@
 --]]
 
 --- @See https://github.com/flukso/lua-mosquitto
+--- @See https://www.kyne.com.au/~mark/software/lua-cjson.php
 mqtt  		= require('mosquitto')
 json  		= require('cjson.safe')
 lgi   		= require('lgi')
@@ -22,9 +23,10 @@ Notify      = lgi.require('Notify')
 builder     = Gtk.Builder()
 
 builder:add_from_file('../data/chat.ui')
-ui = builder.objects
+ui  = builder.objects
 msg = nil
-Notify.init("Mqtt-chat")
+
+Notify.init("Notifications-initialized")
 
 -- Mqtt-Chat files
 require 'messages'
